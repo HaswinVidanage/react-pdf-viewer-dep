@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import VisibilitySensor from 'react-visibility-sensor';
 /**
  * Page.js
  * Component rendering page of PDF
@@ -12,7 +12,11 @@ class Page extends Component {
     width: 0,
     height: 0
   };
-
+  
+  constructor(props) {
+    super(props);
+    this.onVisibilityChange = this.onVisibilityChange.bind(this);
+  }
   shouldComponentUpdate(nextProps, nextState) {
     return this.props.pdf !== nextProps.pdf || this.state.status !== nextState.status;
   }
@@ -67,14 +71,29 @@ class Page extends Component {
 
     this.setState({ status: 'rendered', page, width, height });
   }
-
+  
+  onVisibilityChange(isVisible) {
+    // console.log(`Page ${this.props.index} is now %s`, isVisible ? 'visible' : 'hidden');
+    if (isVisible) {
+      this.props.onCurrentPageChange(this.props.index);
+      console.log(`Page ${this.props.index} is now visible`);
+    }
+  };
   render() {
     let { width, height, status } = this.state;
-
+    // const { changePageTriggerVal } = this.props;
+    console.log('props:', this.props);
     return (
-      <div className={`pdf-page ${status}`} style={{ width, height }} id={this.props.index}>
-        <canvas ref={this.setCanvasRef} data-page-number={this.props.index}/>
-      </div>
+      <VisibilitySensor
+        scrollCheck
+        scrollThrottle={100}
+        intervalDelay={8000}
+        partialVisibility
+        onChange={this.onVisibilityChange}>
+        <div className={`pdf-page ${status}`} style={{ width, height }} id={this.props.index}>
+          <canvas ref={this.setCanvasRef} data-page-number={this.props.index} />
+        </div>
+      </VisibilitySensor>
     );
   }
 }

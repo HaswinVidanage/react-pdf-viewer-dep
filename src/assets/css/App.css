@@ -12,9 +12,12 @@ body {
     height: 90px;
 }
 
-.App-header {
+.toc {
+    z-index: 1;
+    position: fixed;
     background-color: #222;
-    height: 150px;
+    height: 250px;
+    width: 225px;
     padding: 20px;
     color: white;
 }

@@ -22,9 +22,17 @@ class PDFViewer extends Component {
 
   render() {
     const { pdf, scale } = this.state;
+    const { changePageTriggerVal, onCurrentPageChange } = this.props;
+  
+    // if(changePageTriggerVal &&  pdf){
+    //   console.log('changePageTriggerVal', changePageTriggerVal);
+    //   PdfJs.currentPageNumber = 5;
+    // }
     return (
       <div className="pdf-context">
         <Viewer
+          changePageTriggerVal={changePageTriggerVal}
+          onCurrentPageChange={onCurrentPageChange}
           pdf={pdf}
           scale={scale}
         />
