@@ -26,13 +26,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">PDF.JS Example for ReactJS</h1>
         </header>
-        <p className="App-intro">
-          To get started, check code in <code>src/components/PDFViewer/index.js</code>.
-        </p>
-        <button className="App-button" onClick={this.toggleRender}>Open default PDF</button>
+        <button className="App-button" onClick={this.toggleRender}>Open PDF</button>
 
         { renderPdf && (
           <div className="App-overlay">

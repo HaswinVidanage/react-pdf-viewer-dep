@@ -72,8 +72,8 @@ class Page extends Component {
     let { width, height, status } = this.state;
 
     return (
-      <div className={`pdf-page ${status}`} style={{ width, height }}>
-        <canvas ref={this.setCanvasRef} />
+      <div className={`pdf-page ${status}`} style={{ width, height }} id={this.props.index}>
+        <canvas ref={this.setCanvasRef} data-page-number={this.props.index}/>
       </div>
     );
   }
